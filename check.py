@@ -60,5 +60,4 @@ def check_update(first_run=False):
         save_known_ids(known_ids | new_ids)
 
 if __name__ == "__main__":
-    first_run = not os.path.exists(SAVE_FILE)
-    check_update(first_run=first_run)
+    check_update()
