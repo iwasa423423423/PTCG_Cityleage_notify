@@ -2,7 +2,7 @@ import requests
 import os
 import json
 
-URL = "https://players.pokemon-card.com/event/search?prefecture=12&prefecture=14&prefecture=13&prefecture=11&event_type=3:2&offset=0&accepting=true&order=1"
+URL = "https://players.pokemon-card.com/api/event/search?prefecture=12&prefecture=14&prefecture=13&prefecture=11&event_type=3:2&offset=0&accepting=true&order=1"
 DISCORD_WEBHOOK_URL = os.environ.get("DISCORD_WEBHOOK_URL")
 SAVE_FILE = "known_ids.json"
 
@@ -45,7 +45,7 @@ def check_update(first_run=False):
     known_ids = load_known_ids()
     new_ids = set()
 
-    for ev in data.get("events", []):
+    for ev in data.get("event", []):
         ev_id = str(ev["id"])
         if ev_id not in known_ids:
             if not first_run:
