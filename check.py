@@ -29,7 +29,6 @@ def save_known_ids(ids):
         json.dump(list(ids), f, ensure_ascii=False)
 
 def check_update(first_run=False):
-    # User-Agentをつけてアクセス
     res = requests.get(URL, headers={"User-Agent": "Mozilla/5.0"})
     
     if not res.text.strip():
@@ -49,9 +48,9 @@ def check_update(first_run=False):
         ev_id = str(ev["id"])
         if ev_id not in known_ids:
             if not first_run:
-                ev_name = ev["title"]
-                ev_shop = ev["shop_name"]
-                ev_date = ev["date"]
+                ev_name = ev["event_title"]  # ✅ 修正済み
+                ev_shop = ev["shop_name"]    # ✅ OK
+                ev_date = ev["event_date"]   # ✅ 修正済み
                 ev_url = f"https://players.pokemon-card.com/event/{ev_id}"
                 msg = f"🆕 新規シティリーグ\n{ev_name}\n{ev_shop}\n{ev_date}\n{ev_url}"
                 send_discord(msg)
